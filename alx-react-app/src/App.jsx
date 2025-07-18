@@ -43,9 +43,9 @@ function App() {
         <Footer />
       </div>
        <UserProfile
-        name="Adam"
-        age={20}
-        bio="Loves Training and photography"
+        name="Alice"
+        age="25"
+        bio="Loves hiking and photography"
       />
     </>
   )
