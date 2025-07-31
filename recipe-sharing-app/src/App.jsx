@@ -3,6 +3,7 @@ import AddRecipeForm from './components/AddRecipeForm';
 import RecipeList from './components/RecipeList';
 import RecipeDetails from './components/RecipeDetails';
 import SearchBar from './components/SearchBar';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
             </>
           }
         />
+        <Route path="/recipes/:id" element={<RecipeDetails />} />
+        <Route path="/" element={<Home />} />
         <Route path="/recipes/:id" element={<RecipeDetails />} />
       </Routes>
     </BrowserRouter>
