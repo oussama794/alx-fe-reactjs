@@ -1,55 +1,51 @@
 import { useState } from 'react';
 
-const Search = ({ onSearch }) => {
-  const [username, setUsername] = useState('');
-  const [location, setLocation] = useState('');
-  const [minRepos, setMinRepos] = useState('');
+const inputs = [
+  { placeholder: 'Username', key: 'username', type: 'text' },
+  { placeholder: 'Location', key: 'location', type: 'text' },
+  { placeholder: 'Min Repos', key: 'minRepos', type: 'number' },
+];
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSearch({
-      username,
-      location,
-      minRepos,
-    });
+const Search = ({ onSearch }) => {
+  const [formData, setFormData] = useState({
+    username: '',
+    location: '',
+    minRepos: '',
+  });
+
+  const handleChange = (key) => (event) => {
+    setFormData((prev) => ({ ...prev, [key]: event.target.value }));
   };
 
-  const handleUsernameChange = (event) => setUsername(event.target.value);
-  const handleLocationChange = (event) => setLocation(event.target.value);
-  const handleMinReposChange = (event) => setMinRepos(event.target.value);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await new Promise((resolve) => setTimeout(resolve, 0)); 
+    onSearch(formData);
+  };
 
   return (
     <form
       onSubmit={handleSubmit}
       className="p-4 flex flex-col gap-4 md:flex-row md:items-center bg-gray-100 rounded-lg shadow-md"
     >
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={handleUsernameChange}
-        className="p-2 rounded border w-full"
-      />
-      <input
-        type="text"
-        placeholder="Location"
-        value={location}
-        onChange={handleLocationChange}
-        className="p-2 rounded border w-full"
-      />
-      <input
-        type="number"
-        placeholder="Min Repos"
-        value={minRepos}
-        onChange={handleMinReposChange}
-        className="p-2 rounded border w-full"
-      />
-      <button
-        type="submit"
-        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-      >
-        Search
-      </button>
+      {inputs.map(({ placeholder, key, type }) => (
+        <input
+          key={key}
+          type={type}
+          placeholder={placeholder}
+          value={formData[key]}
+          onChange={handleChange(key)}
+          className="p-2 rounded border w-full"
+        />
+      ))}
+      {formData.username && (
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Search
+        </button>
+      )}
     </form>
   );
 };
