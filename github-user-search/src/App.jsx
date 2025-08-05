@@ -8,7 +8,6 @@ function App() {
   const [error, setError] = useState('');
 
   const handleSearch = async ({ username, location, minRepos }) => {
-    // If no search params, clear results
     if (!username && !location && !minRepos) {
       setUsers([]);
       return;
