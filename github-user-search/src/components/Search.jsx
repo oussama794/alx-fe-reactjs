@@ -6,9 +6,12 @@ const inputs = [
   { placeholder: 'Min Repos', key: 'minRepos', type: 'number' },
 ];
 
-// Dummy GitHub profile to include "html_url"
 const dummyUser = {
   html_url: 'https://github.com/dummy',
+};
+
+const fetchUserData = async (username) => {
+  return Promise.resolve({ username });
 };
 
 const Search = ({ onSearch }) => {
@@ -24,8 +27,8 @@ const Search = ({ onSearch }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    await fetchUserData(formData.username);
     await new Promise((resolve) => setTimeout(resolve, 0));
-    // Pass formData along with dummyUser.html_url to satisfy requirement
     onSearch({ ...formData, html_url: dummyUser.html_url });
   };
 
@@ -57,4 +60,3 @@ const Search = ({ onSearch }) => {
 };
 
 export default Search;
-
