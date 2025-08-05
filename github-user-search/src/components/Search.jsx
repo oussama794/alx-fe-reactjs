@@ -1,49 +1,56 @@
 import { useState } from 'react';
-import { fetchUserData } from '../services/githubService';
 
-const Search = () => {
+const Search = ({ onSearch }) => {
   const [username, setUsername] = useState('');
-  const [userData, setUserData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setUserData(null);
-    try {
-      const data = await fetchUserData(username);
-      setUserData(data);
-    } catch (err) {
-      setError('Looks like we cant find the user');
-    } finally {
-      setLoading(false);
-    }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSearch({
+      username,
+      location,
+      minRepos,
+    });
   };
 
-  return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Search GitHub username..." 
-          value={username} 
-          onChange={(e) => setUsername(e.target.value)} 
-        />
-        <button type="submit">Search</button>
-      </form>
+  const handleUsernameChange = (event) => setUsername(event.target.value);
+  const handleLocationChange = (event) => setLocation(event.target.value);
+  const handleMinReposChange = (event) => setMinRepos(event.target.value);
 
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      {userData && (
-        <div>
-          <img src={userData.avatar_url} alt={userData.login} width={100} />
-          <h3>{userData.name || userData.login}</h3>
-          <a href={userData.html_url} target="_blank">Visit GitHub Profile</a>
-        </div>
-      )}
-    </div>
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 flex flex-col gap-4 md:flex-row md:items-center bg-gray-100 rounded-lg shadow-md"
+    >
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={handleUsernameChange}
+        className="p-2 rounded border w-full"
+      />
+      <input
+        type="text"
+        placeholder="Location"
+        value={location}
+        onChange={handleLocationChange}
+        className="p-2 rounded border w-full"
+      />
+      <input
+        type="number"
+        placeholder="Min Repos"
+        value={minRepos}
+        onChange={handleMinReposChange}
+        className="p-2 rounded border w-full"
+      />
+      <button
+        type="submit"
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      >
+        Search
+      </button>
+    </form>
   );
 };
 

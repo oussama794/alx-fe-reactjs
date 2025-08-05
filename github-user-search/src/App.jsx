@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SearchBar from './components/SearchBar';
+import Search from './components/Search';
 import { searchUsers } from './services/githubService';
 
 function App() {
@@ -7,18 +7,20 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSearch = async (query) => {
-    if (!query) {
+  const handleSearch = async ({ username, location, minRepos }) => {
+    // If no search params, clear results
+    if (!username && !location && !minRepos) {
       setUsers([]);
       return;
     }
+
     setLoading(true);
     setError('');
     try {
-      const response = await searchUsers(query);
+      const response = await searchUsers({ username, location, minRepos });
       setUsers(response.data.items);
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
       setUsers([]);
       setError("Looks like we can't find the user");
     } finally {
@@ -27,21 +29,37 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>GitHub User Search</h1>
-      <SearchBar onSearch={handleSearch} />
+    <div className="max-w-4xl mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-6 text-center">GitHub User Search</h1>
 
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      <Search onSearch={handleSearch} />
 
-      {users.length === 0 && !loading && !error && <p>No users found.</p>}
+      {loading && <p className="mt-4 text-center">Loading...</p>}
+      {error && <p className="mt-4 text-center text-red-600">{error}</p>}
 
-      <ul>
-        {users.map(user => (
-          <li key={user.id}>
-            <img src={user.avatar_url} alt={user.login} width={50} />
-            <a href={user.html_url} target="_blank" rel="noreferrer">
-              {user.login}
+      {!loading && !error && users.length === 0 && (
+        <p className="mt-4 text-center text-gray-600">No users found.</p>
+      )}
+
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        {users.map((user) => (
+          <li
+            key={user.id}
+            className="p-4 border rounded shadow hover:shadow-lg transition"
+          >
+            <img
+              src={user.avatar_url}
+              alt={user.login}
+              className="w-20 h-20 rounded-full mx-auto mb-3"
+            />
+            <h3 className="text-xl font-semibold text-center">{user.login}</h3>
+            <a
+              href={user.html_url}
+              target="_blank"
+              rel="noreferrer"
+              className="block mt-2 text-center text-blue-600 hover:underline"
+            >
+              View Profile
             </a>
           </li>
         ))}
@@ -51,5 +69,3 @@ function App() {
 }
 
 export default App;
-
-
