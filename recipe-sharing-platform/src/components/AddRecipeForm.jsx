@@ -6,35 +6,38 @@ export default function AddRecipeForm() {
   const [instructions, setInstructions] = useState("");
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const validate = () => {
     const newErrors = {};
-
     if (!title.trim()) newErrors.title = "Title is required";
     if (!ingredients.trim()) newErrors.ingredients = "Ingredients are required";
     if (!instructions.trim()) newErrors.instructions = "Instructions are required";
 
-    // Optional: check ingredients has at least 2 items
     if (ingredients.split(",").filter((i) => i.trim() !== "").length < 2) {
       newErrors.ingredients = "Add at least 2 ingredients separated by commas";
     }
 
     setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // true if valid
+  };
 
-    if (Object.keys(newErrors).length === 0) {
-      const newRecipe = {
-        title,
-        ingredients: ingredients.split(",").map((i) => i.trim()),
-        instructions: instructions.split(".").map((i) => i.trim()).filter((i) => i),
-      };
-      console.log("New Recipe:", newRecipe);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validate()) return;
 
-      // Reset form
-      setTitle("");
-      setIngredients("");
-      setInstructions("");
-      alert("Recipe submitted successfully!");
-    }
+    const newRecipe = {
+      title,
+      ingredients: ingredients.split(",").map((i) => i.trim()),
+      instructions: instructions
+        .split(".")
+        .map((i) => i.trim())
+        .filter((i) => i),
+    };
+    console.log("New Recipe:", newRecipe);
+
+    setTitle("");
+    setIngredients("");
+    setInstructions("");
+    alert("Recipe submitted successfully!");
   };
 
   return (
@@ -75,7 +78,6 @@ export default function AddRecipeForm() {
           {errors.instructions && <p className="text-red-500 text-sm mt-1">{errors.instructions}</p>}
         </div>
 
-        {/* Submit */}
         <button
           type="submit"
           className="px-6 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition"
