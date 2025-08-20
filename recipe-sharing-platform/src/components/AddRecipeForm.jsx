@@ -17,7 +17,7 @@ export default function AddRecipeForm() {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // true if valid
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
@@ -45,7 +45,7 @@ export default function AddRecipeForm() {
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Add a New Recipe</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title */}
-        <div>
+        <div className="md:flex md:flex-col">
           <label className="block text-gray-700 font-semibold mb-1">Title</label>
           <input
             type="text"
@@ -57,25 +57,33 @@ export default function AddRecipeForm() {
         </div>
 
         {/* Ingredients */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-1">Ingredients (comma-separated)</label>
+        <div className="md:flex md:flex-col">
+          <label className="block text-gray-700 font-semibold mb-1">
+            Ingredients (comma-separated)
+          </label>
           <textarea
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             className="w-full border border-gray-300 rounded-xl p-2 h-24 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          {errors.ingredients && <p className="text-red-500 text-sm mt-1">{errors.ingredients}</p>}
+          {errors.ingredients && (
+            <p className="text-red-500 text-sm mt-1">{errors.ingredients}</p>
+          )}
         </div>
 
         {/* Instructions */}
-        <div>
-          <label className="block text-gray-700 font-semibold mb-1">Instructions (separate steps with periods)</label>
+        <div className="md:flex md:flex-col">
+          <label className="block text-gray-700 font-semibold mb-1">
+            Instructions (separate steps with periods)
+          </label>
           <textarea
             value={instructions}
             onChange={(e) => setInstructions(e.target.value)}
             className="w-full border border-gray-300 rounded-xl p-2 h-32 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          {errors.instructions && <p className="text-red-500 text-sm mt-1">{errors.instructions}</p>}
+          {errors.instructions && (
+            <p className="text-red-500 text-sm mt-1">{errors.instructions}</p>
+          )}
         </div>
 
         <button
