@@ -3,30 +3,40 @@
     "id": 1,
     "title": "Spaghetti Carbonara",
     "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-    "image": "https://via.placeholder.com/300x200"
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": ["Spaghetti", "Eggs", "Parmesan cheese", "Bacon", "Black pepper"],
+    "instructions": ["Boil spaghetti", "Cook bacon", "Mix eggs & cheese", "Combine & serve"]
   },
   {
     "id": 2,
     "title": "Chicken Tikka Masala",
-    "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato based gravy.",
-    "image": "https://via.placeholder.com/300x200"
+    "summary": "Chunks of grilled chicken cooked in a smooth buttery & creamy tomato based gravy.",
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": ["Chicken", "Tomatoes", "Cream", "Spices"],
+    "instructions": ["Grill chicken", "Prepare sauce", "Simmer chicken in sauce", "Serve with rice"]
   },
   {
     "id": 3,
     "title": "Moroccan Tajine",
-    "summary": "A slow-cooked Moroccan dish with tender meat, vegetables, and a blend of aromatic spices.",
-    "image": "https://via.placeholder.com/300x200"
+    "summary": "A slow-cooked Moroccan dish with tender meat, vegetables, and spices.",
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": ["Lamb/Chicken", "Onions", "Carrots", "Spices", "Olive oil"],
+    "instructions": ["Marinate meat", "Cook vegetables", "Slow-cook everything", "Serve with bread"]
   },
   {
     "id": 4,
     "title": "Moroccan Mint Tea",
     "summary": "A refreshing traditional Moroccan green tea brewed with fresh mint leaves and sugar.",
-    "image": "https://via.placeholder.com/300x200"
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": ["Green tea", "Mint leaves", "Sugar", "Hot water"],
+    "instructions": ["Boil water", "Add tea & mint", "Add sugar", "Serve hot"]
   },
   {
     "id": 5,
     "title": "Avocado Toast",
     "summary": "Crispy toasted bread topped with mashed avocado, lemon juice, and seasoning.",
-    "image": "https://via.placeholder.com/300x200"
+    "image": "https://via.placeholder.com/300x200",
+    "ingredients": ["Bread", "Avocado", "Lemon", "Salt", "Pepper"],
+    "instructions": ["Toast bread", "Mash avocado", "Spread & season", "Serve fresh"]
   }
 ]
