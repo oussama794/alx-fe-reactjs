@@ -1,19 +1,15 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Profile from './components/Profile';
+import ProtectedRoute from './components/ProtectedRoute';
 import BlogPost from './pages/BlogPost';
 import Login from './pages/Login';
-
-const isAuthenticated = false; // simulate login
-
-function ProtectedRoute({ children }) {
-  return isAuthenticated ? children : <Navigate to="/login" />;
-}
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Home page */}
         <Route path="/" element={<Home />} />
 
         {}
@@ -29,6 +25,7 @@ function App() {
         {}
         <Route path="/blog/:id" element={<BlogPost />} />
 
+        {/* Login page */}
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
