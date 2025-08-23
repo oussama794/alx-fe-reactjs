@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Profile from './components/Profile';
-import Post from './pages/Post';
+import BlogPost from './pages/BlogPost';
 import Login from './pages/Login';
 
 const isAuthenticated = false; // simulate login
@@ -27,7 +27,7 @@ function App() {
         />
 
         {}
-        <Route path="/post/:id" element={<Post />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
 
         <Route path="/login" element={<Login />} />
       </Routes>
