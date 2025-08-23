@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Profile from './components/Profile';
-import ProfileDetails from './components/ProfileDetails';
-import ProfileSettings from './components/ProfileSettings';
 import Post from './pages/Post';
 import Login from './pages/Login';
 
@@ -18,13 +16,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        {/* Protected Profile */}
-        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>}>
-          <Route path="details" element={<ProfileDetails />} />
-          <Route path="settings" element={<ProfileSettings />} />
-        </Route>
+        {}
+        <Route
+          path="/profile/*"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
 
-        {/* Dynamic Route for blog post */}
+        {}
         <Route path="/post/:id" element={<Post />} />
 
         <Route path="/login" element={<Login />} />
